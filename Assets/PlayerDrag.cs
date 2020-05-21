@@ -39,7 +39,7 @@ public class PlayerDrag : MonoBehaviour {
         if (Input.GetMouseButtonUp(0)) {
             dragStartPos = null;
             rigidbody2D.AddForce(forceMultiplier * worldOffset, ForceMode2D.Impulse);
-            rigidbody2D.AddTorque(forceMultiplier * worldOffset.magnitude);
+            rigidbody2D.AddTorque(forceMultiplier * worldOffset.magnitude * 10);
         }
     }
 }

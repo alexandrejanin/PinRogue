@@ -8,6 +8,9 @@ public class TNT : Weapon {
     [Button]
     public override void Hit(Hurtable hurtable) {
         foreach (var rigidbody2D in FindObjectsOfType<Rigidbody2D>()) {
+            if (rigidbody2D.gameObject == gameObject)
+                continue;
+
             if (Vector3.Distance(transform.position, rigidbody2D.position) < range) {
                 var direction = (rigidbody2D.position - (Vector2) transform.position).normalized;
                 var normalizedDistance = (rigidbody2D.position - (Vector2) transform.position).magnitude / range;
