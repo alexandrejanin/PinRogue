@@ -30,12 +30,16 @@ public class PlayerDrag : MonoBehaviour {
         worldOffset = Vector3.ClampMagnitude(worldOffset, maxForce);
 
         lineRenderer.enabled = Input.GetMouseButton(0);
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, transform.position + worldOffset);
+        lineRenderer.SetPosition(0, new Vector3(transform.position.x, transform.position.y, 1));
+        lineRenderer.SetPosition(1,
+            new Vector3((transform.position + worldOffset).x, (transform.position + worldOffset).y, 1));
+
+        transform.up = worldOffset;
 
         if (Input.GetMouseButtonUp(0)) {
             dragStartPos = null;
             rigidbody2D.AddForce(forceMultiplier * worldOffset, ForceMode2D.Impulse);
+            rigidbody2D.AddTorque(forceMultiplier * worldOffset.magnitude);
         }
     }
 }
